@@ -1,19 +1,56 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div id="app" :data-theme="theme">
+    <ui />
+    <!-- <mapbox /> -->
+    <loading v-if="isLoading" />
+    <connectivity />
   </div>
 </template>
 
+<script>
+// import mapbox from "@/components/mapbox";
+
+import { mapGetters, mapMutations } from "vuex";
+
+import connectivity from "@/components/connectivity";
+import loading from "@/components/loading";
+import ui from "@/components/ui";
+import { get } from "@/utils/storage";
+import { initThemeHandler, destroyThemeHandler } from "@/utils/theme";
+
+export default {
+  name: "app",
+  components: {
+    // mapbox,
+    ui,
+    loading,
+    connectivity,
+  },
+  computed: {
+    ...mapGetters("app", ["theme", "isLoading", "isOffline"]),
+    ...mapGetters("auth", ["loggedIn"]),
+  },
+  watch: {
+    loggedIn(newValue, oldValue) {
+      console.log(newValue, oldValue);
+    },
+  },
+  methods: {
+    ...mapMutations("auth", {
+      setUser: "SET_USER",
+    }),
+  },
+  mounted() {
+    initThemeHandler();
+
+    get("user").then((user) => this.setUser(user));
+  },
+  beforeDestroy() {
+    destroyThemeHandler();
+  },
+};
+</script>
+
 <style lang="stylus">
-#app
-  font-family Avenir, Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+@import './assets/styles/app.styl';
 </style>

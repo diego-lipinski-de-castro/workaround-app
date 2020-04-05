@@ -1,0 +1,36 @@
+magicEight = 8px // search for "8pt grid system"
+magicFour = magicEight * 0.5
+levels = (0 1 2 3 4 5 6 7 8 9 10)
+
+// util for margins
+generate_margins(size)
+   for level in levels
+      .m-{level}
+         margin: size * level
+      .m-x-{level}
+         margin-left: size * level
+         margin-right: size * level
+      .m-y-{level}
+         margin-top: size * level
+         margin-bottom: size * level
+      for side in top right bottom left
+         .m-{substr(side, 0, 1)}-{level}
+            margin-{side}: size * level
+
+// util for paddings
+generate_paddings(size)
+   for level in levels
+      .p-{level}
+         padding: size * level
+      .p-x-{level}
+         padding-left: size * level
+         padding-right: size * level
+      .p-y-{level}
+         padding-top: size * level
+         padding-bottom: size * level
+      for side in top right bottom left
+         .p-{substr(side, 0, 1)}-{level}
+            padding-{side}: size * level
+
+generate_margins(magicFour)
+generate_paddings(magicFour)

@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700&display=swap")
+@import "helper.styl"
+
+*
+  box-sizing border-box
+  font-family "Lato", sans-serif
+  letter-spacing 0.5px
+
+  &:before, &:after
+    box-sizing border-box
+
+html
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  font-size 16px
+  line-height 16px
+  height 100%
+
+body
+  margin 0
+  height 100%
+
+#app
+  height 100%
+  --bg-color #FFFFFF
+  --text-color #121212
+  --button-bg-color #121212
+  --button-text-color #FFFFFF
+  --input-bg-color darken(#FFFFFF, 5)
+  --input-text-color #121212
+  --placeholder-color darken(#FFFFFF, 60)
+  --topnav-bg-color #121212
+
+  color var(--text-color)
+  background-color var(--bg-color)
+
+  &[data-theme="dark"]
+    --bg-color #121212
+    --text-color lighten(#121212, 87)
+    --label-text-color lighten(#121212, 60)
+    --button-bg-color lighten(#121212, 12)
+    --button-text-color lighten(#121212, 87)
+    --input-bg-color lighten(#121212, 5)
+    --input-text-color lighten(#121212, 87)
+    --placeholder-color lighten(#121212, 38)
+    --topnav-bg-color #121212
+
+// .topnav-wrapper
+  // background-color var(--color-blue)
+
+@keyframes fade-in {
+  from {
+    transform: translate3d(-20px, 0, 0)
+  }
+
+  to {
+    transform: translate3d(0, 0, 0)
+    opacity: 1
+  }
+}
+
+.fade-in-leave-to
+  opacity 0
+  transition opacity 350ms
+
+.fade-in-enter
+  opacity 0
+  transform translate3d(-20px, 0, 0)
+
+.fade-in-enter-to
+  opacity 0
+  animation-duration 350ms
+  animation-fill-mode both
+  animation-name fade-in
+
+a
+  text-decoration none
+  -webkit-tap-highlight-color transparent
+  user-select none
+  background-color transparent
+  color inherit
+  padding 12px
+
+  &:focus
+    outline none
+
+i[class^="gg-"]
+  color var(--text-color) !important
+  &:focus
+    outline none
+
+button
+  font-size 1rem
+  padding: 12px
+  background-color var(--button-bg-color)
+  color var(--button-text-color)
+  border none
+  text-transform uppercase
+  border-radius 8px
+
+  &:focus
+    outline none
+
+h1
+  margin 0
+  font-weight lighter
+  &:focus
+    outline none
+
+label
+  font-size 1rem
+  margin-bottom: 8px
+  color var(--label-text-color, inherit)
+
+input
+  background-color var(--input-bg-color)
+  color var(--input-text-color)
+  border none
+  padding 12px
+  font-size: 1rem
+  border-radius 8px
+
+  &:focus
+    outline none
+
+::placeholder
+  font-size 1rem
+  color var(--placeholder-color)
+
+.d-block
+  display block
+
+.text-center
+  text-align center
+
+.input-group
+  display flex
+  flex-direction column
+  padding: 12px
+
+  .input-error-helper
+    color red
